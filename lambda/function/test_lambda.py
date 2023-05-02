@@ -12,8 +12,7 @@ def event():
     "time": "2022-12-15T23:25:00Z",
     "region": "eu-west-1",
     "resources": [
-        "membrane-training-0",
-        "membrane-prep-0",
+        "database-training-0",
     ],
     "detail": {
         "eventArn": "arn:aws:health:eu-west-1::event/RDS/AWS_RDS_OPERATIONAL_NOTIFICATION/AWS_RDS_OPERATIONAL_NOTIFICATION_228d6e2ee15b7b3adc7e7b7db05ea8ec67fc8ecb80853e74627821514df9a0b5",
@@ -29,10 +28,7 @@ def event():
             ],
         "affectedEntities": [
             {
-                "entityValue": "membrane-training-0"
-            },
-            {
-                "entityValue": "membrane-prep-0"
+                "entityValue": "database-training-0"
             }
         ]
     }
