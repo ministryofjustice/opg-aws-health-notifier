@@ -1,0 +1,12 @@
+#  Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+.vscode
+
+venv
+__pycache__
+.pytest_cache
