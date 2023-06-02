@@ -5,6 +5,9 @@ FROM python:alpine3.16 AS python-alpine
 RUN apk add --no-cache \
     libstdc++
 
+# Patch security vulnerabilities
+RUN apk upgrade --no-cache libcom_err libcrypto1.1 libssl1.1 ncurses-terminfo-base
+
 FROM python-alpine as build-image
 
 # Install aws-lambda-cpp build dependencies
@@ -36,9 +39,6 @@ RUN python -m pip install \
 
 # Multi-stage build: grab a fresh copy of the base image
 FROM python-alpine AS production
-
-# Patch security vulnerabilities
-RUN apk upgrade --no-cache libcom_err
 
 # Include global arg in this stage of the build
 ARG FUNCTION_DIR
