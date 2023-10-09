@@ -103,5 +103,6 @@ jobs:
           fi
 
       - name: Put Tag
-        if: ${{ env.BRANCH_NAME }} == "main"
+        # if: ${{ env.BRANCH_NAME == 'main' }}
+        if: ${{ env.BRANCH_NAME == 'SP-1732' }}
         run: aws ssm put-parameter --region "eu-west-1" --name "/shared/aws-health-notifier-lambda-version" --type "String" --value "${{ env.APP_VERSION }}" --overwrite
