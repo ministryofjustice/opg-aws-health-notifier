@@ -5,6 +5,8 @@ FROM python:alpine3.16 AS python-alpine
 RUN apk add --no-cache \
     libstdc++
 
+RUN python -m pip install --upgrade pip
+
 # Patch security vulnerabilities
 RUN apk upgrade --no-cache libcom_err libcrypto1.1 libssl1.1 ncurses-terminfo-base
 
@@ -32,7 +34,6 @@ COPY function/send_health_events_to_slack.py ${FUNCTION_DIR}/send_health_events_
 COPY requirements.txt requirements.txt
 
 # Install the runtime interface client
-RUN python -m pip install --upgrade pip
 RUN python -m pip install \
         --target ${FUNCTION_DIR} \
         --requirement requirements.txt
