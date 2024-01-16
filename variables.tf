@@ -2,6 +2,12 @@ variable "account_name" {
   description = "AWS account name"
 }
 
+variable "failed_invocation_sns_arn" {
+  type        = string
+  default     = null
+  description = "ARN of SNS Topic to send failed invocations to."
+}
+
 variable "ecr_repository_url" {
   type        = string
   description = "URL of the ECR repository"
