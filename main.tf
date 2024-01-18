@@ -42,7 +42,7 @@ resource "aws_lambda_function" "lambda_function" {
 resource "aws_cloudwatch_metric_alarm" "failed_invocation" {
   actions_enabled   = var.failed_invocation_sns_arn != "" ? true : false
   alarm_actions     = [var.failed_invocation_sns_arn]
-  alarm_description = "Health Notificatier Lambda Errors"
+  alarm_description = "Health Notifier Lambda Errors"
   alarm_name        = "health-notifier-lambda-errors"
   depends_on = [
     aws_lambda_function.lambda_function
