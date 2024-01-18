@@ -40,7 +40,7 @@ resource "aws_lambda_function" "lambda_function" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "failed_invocation" {
-  count             = var.failed_invocation_sns_arn != null ? 1 : 0
+  actions_enabled   = var.failed_invocation_sns_arn != "" ? true : false
   alarm_actions     = [var.failed_invocation_sns_arn]
   alarm_description = "Health Notificatier Lambda Errors"
   alarm_name        = "health-notifier-lambda-errors"
@@ -48,8 +48,8 @@ resource "aws_cloudwatch_metric_alarm" "failed_invocation" {
     aws_lambda_function.lambda_function
   ]
 
-  comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = 2
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = 1
   metric_name         = "Errors"
   namespace           = "AWS/Lambda"
   period              = 60
