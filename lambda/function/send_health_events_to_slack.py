@@ -8,7 +8,8 @@ def notify(slack_token, slack_channel, message):
     client = WebClient(token=slack_token)
     client.chat_postMessage(
         channel=slack_channel,
-        blocks = blocks(message)
+        blocks = blocks(message),
+        text = f"{message.service} {message.eventType}",
     )
 
 def get_token():
@@ -58,11 +59,16 @@ def blocks(message):
 class Message:
     def __init__(self, event):
         self.account = event['account']
-        self.region = event['region']
-        self.url = str("https://phd.aws.amazon.com/phd/home#/account/event-log?eventID=" + event['detail']['eventArn'])
-        self.service = event['detail']['service']
-        self.description = event['detail']['eventDescription'][0]['latestDescription']
         self.alert = False
+        self.region = event['region']
+        self.service = event['detail']['service']
+        self.url = str("https://phd.aws.amazon.com/phd/home#/account/event-log?eventID=" + event['detail']['eventArn'])
+
+        if len(event['detail']['eventDescription'][0]['latestDescription']) > 3000:
+            self.description = "Event description exceeds character limit."
+        else:
+            self.description = event['detail']['eventDescription'][0]['latestDescription']
+
 
         if 'eventTypeCategory' in event['detail']:
             match event['detail']['eventTypeCategory']:
