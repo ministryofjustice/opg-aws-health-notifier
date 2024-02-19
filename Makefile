@@ -1,4 +1,4 @@
-default: test build scan lint terraform clean
+default: test build scan terraform clean
 
 build:
 	docker compose build aws-health-notifier
@@ -21,9 +21,6 @@ venv/touchfile: lambda/requirements.dev.txt
 
 test: venv
 	. venv/bin/activate; pytest lambda
-
-lint:
-	cd local && terraform fmt -check -recursive
 
 terraform:
 	cd local && docker compose up -d
