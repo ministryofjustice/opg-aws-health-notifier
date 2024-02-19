@@ -1,5 +1,6 @@
 variable "account_name" {
   description = "AWS account name"
+  type        = string
 }
 
 variable "ecr_repository_url" {
