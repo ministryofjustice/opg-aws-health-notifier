@@ -26,9 +26,13 @@ jobs:
         with:
           terraform_version: ${{ env.TERRAFORM_VERSION }}
 
+      - name: Check Formating
+        id: tf_fmt
+        run: terraform fmt -check -recursive
+
       - name: Lint Terraform
         id: tf_lint
-        run: make lint
+        run: tflint --recursive
 
       - name: Validate & Plan Terraform
         id: tf_validate
