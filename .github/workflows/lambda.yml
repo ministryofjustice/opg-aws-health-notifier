@@ -37,13 +37,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: unfor19/install-aws-cli-action@v1
+      - uses: unfor19/install-aws-cli-action@v1.0.7
 
       - name: Test with pytest
         run: make test
 
       - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
+        uses: EnricoMi/publish-unit-test-result-action@v2.20.0
         if: always()
         with:
           junit_files: '**/unit-tests.xml'
@@ -55,7 +55,7 @@ jobs:
         run: make scan
 
       - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v4
+        uses: github/codeql-action/upload-sarif@v4.31.0
         if: always()
         with:
           sarif_file: 'test-results/trivy.sarif'
@@ -70,7 +70,7 @@ jobs:
 
       - name: ECR Login
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+        uses: aws-actions/amazon-ecr-login@v2.0.1
         with:
           registries: 311462405659
 
