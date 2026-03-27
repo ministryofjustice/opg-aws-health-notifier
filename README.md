@@ -1,6 +1,6 @@
 # opg-aws-health-notifier
 The Office of the Public Guardian AWS health notifier lambda and infrastructure: Managed by opg-org-infra &amp; Terraform.
-
+trigger workflow
 This can be deployed into any region and by default centralises health events from `eu-west-2` and `us-east-1` into the default provider's region, in our case `eu-west-1`.
 
 <!-- BEGIN_TF_DOCS -->
